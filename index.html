@@ -64,11 +64,13 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(244, 114, 182, 0.25);
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(236, 72, 153, 0.15);
+      will-change: transform, opacity;
     }
 
     .glass-pill {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(244, 114, 182, 0.2);
     }
 
@@ -92,6 +94,7 @@
       box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
       transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
       cursor: pointer;
+      will-change: transform;
     }
 
     .btn-gradient:hover {
@@ -119,7 +122,7 @@
       perspective: 800px;
     }
     .polaroid-card {
-      transition: transform 0.15s ease-out;
+      transition: transform 0.1s ease-out;
       transform-style: preserve-3d;
       will-change: transform;
       border: 1px solid rgba(255, 255, 255, 0.8);
@@ -192,42 +195,70 @@
 
     <!-- STEP 4: Shared Memory -->
     <section id="step-4" class="step-card glass-card rounded-3xl p-6 md:p-8 text-center flex flex-col items-center gap-6 hidden">
-      <h2 class="girly-heading text-4xl md:text-5xl text-gradient">That One Time...</h2>
+      <h2 class="girly-heading text-4xl md:text-5xl text-gradient">Besties Forever...</h2>
       
       <div class="polaroid-wrapper py-2" id="polaroid-wrapper">
         <div id="polaroid" class="polaroid-card bg-white p-3 pt-3 pb-5 rounded-sm shadow-[0_20px_40px_rgba(0,0,0,0.6)] rotate-[-3deg] max-w-[260px] mx-auto text-slate-800">
           <div class="aspect-square overflow-hidden rounded-sm mb-3 relative bg-slate-900 flex items-center justify-center">
             
+            <!-- ANIME STYLE HOLDING HANDS SVG -->
             <svg class="w-full h-full object-cover" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#2d133f" />
-                  <stop offset="50%" stop-color="#4a184e" />
-                  <stop offset="100%" stop-color="#190a2a" />
+                <linearGradient id="anime-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#1f092e" />
+                  <stop offset="50%" stop-color="#3b1448" />
+                  <stop offset="100%" stop-color="#12041d" />
                 </linearGradient>
+                <filter id="soft-glow">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
               </defs>
 
-              <rect width="500" height="500" fill="url(#bg-grad)" />
-              <path d="M 0 50 Q 125 120 250 50 Q 375 120 500 50" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.6"/>
-              <polygon points="40,68 70,68 55,110" fill="#f472b6" opacity="0.8"/>
-              <polygon points="110,85 140,85 125,127" fill="#c084fc" opacity="0.8"/>
-              <polygon points="180,88 210,88 195,130" fill="#fb7185" opacity="0.8"/>
+              <!-- Background -->
+              <rect width="500" height="500" fill="url(#anime-bg)" />
+              
+              <!-- Soft Stars & Bunting Flags -->
+              <circle cx="80" cy="80" r="2" fill="#fff" opacity="0.9"/>
+              <circle cx="420" cy="70" r="3" fill="#fbcfe8" opacity="0.8"/>
+              <circle cx="410" cy="350" r="2" fill="#fff" opacity="0.6"/>
+              
+              <!-- Garland Bunting at top -->
+              <path d="M 50 40 Q 250 90 450 40" stroke="#f472b6" stroke-width="2" stroke-dasharray="6 6" fill="none" opacity="0.6"/>
+              <polygon points="120,57 135,55 127,75" fill="#fbcfe8" opacity="0.8"/>
+              <polygon points="200,69 215,67 207,87" fill="#ec4899" opacity="0.8"/>
+              <polygon points="280,74 295,72 287,92" fill="#c084fc" opacity="0.8"/>
+              <polygon points="360,65 375,63 367,83" fill="#fb7185" opacity="0.8"/>
 
-              <circle cx="80" cy="180" r="3" fill="#fff" opacity="0.8"/>
-              <circle cx="420" cy="220" r="4" fill="#fbcfe8" opacity="0.9"/>
+              <!-- Floating Glowing Hearts -->
+              <path d="M 235 120 C 235 110, 250 100, 260 110 C 270 120, 260 135, 260 135 C 260 135, 250 120, 235 120 Z" fill="#f472b6" opacity="0.9" filter="url(#soft-glow)"/>
 
-              <path d="M 120 500 C 120 380, 160 310, 240 300 C 270 300, 310 320, 330 360 C 350 400, 360 450, 360 500 Z" fill="#1e1b2e" />
-              <path d="M 220 500 C 220 370, 260 300, 330 290 C 380 290, 420 350, 430 500 Z" fill="#3b1531" />
+              <!-- BOY -->
+              <path d="M 120 180 C 120 150, 150 140, 175 160 C 185 170, 190 190, 185 205 C 175 195, 155 180, 120 180 Z" fill="#2b2640"/>
+              <path d="M 135 185 C 130 185, 125 205, 130 220 C 135 235, 150 245, 165 240 C 180 235, 185 215, 180 195 C 175 185, 155 180, 135 185 Z" fill="#ffdec8"/>
+              <path d="M 100 390 L 100 300 C 100 270, 120 250, 160 250 C 190 250, 210 270, 210 320 L 210 390 Z" fill="#3b3355"/>
 
-              <path d="M 210 230 C 230 200, 280 210, 290 240 C 300 270, 270 300, 230 280 C 210 270, 200 250, 210 230 Z" fill="#ffd8c0"/>
-              <circle cx="242" cy="255" r="8" fill="#f472b6" opacity="0.3"/>
-              <circle cx="282" cy="260" r="8" fill="#f472b6" opacity="0.3"/>
+              <!-- GIRL -->
+              <path d="M 310 175 C 330 165, 370 185, 385 225 C 400 270, 405 350, 395 390 C 390 400, 375 380, 370 340 C 360 280, 345 230, 325 210 C 305 195, 295 180, 310 175 Z" fill="#4a2e1b"/>
+              <path d="M 320 190 C 315 200, 310 220, 315 235 C 320 250, 335 260, 350 255 C 365 250, 375 230, 370 210 C 365 195, 345 185, 320 190 Z" fill="#ffdec8"/>
+              <circle cx="335" cy="228" r="7" fill="#f472b6" opacity="0.5"/>
+              <circle cx="358" cy="224" r="7" fill="#f472b6" opacity="0.5"/>
+              <path d="M 290 390 L 290 310 C 290 275, 315 250, 350 250 C 385 250, 410 275, 410 320 L 410 390 Z" fill="#ec4899" opacity="0.95"/>
 
-              <text x="250" y="450" font-family="'Sacramento', cursive" font-size="38" fill="#fbcfe8" text-anchor="middle">Happy Birthday</text>
+              <!-- HOLDING HANDS -->
+              <path d="M 185 300 Q 220 310 245 285" stroke="#3b3355" stroke-width="18" stroke-linecap="round" fill="none"/>
+              <path d="M 310 300 Q 275 310 250 285" stroke="#ec4899" stroke-width="16" stroke-linecap="round" fill="none"/>
+              <circle cx="248" cy="285" r="12" fill="#ffdec8"/>
+              <path d="M 248 280 C 248 275, 255 270, 258 275 C 261 280, 248 290, 248 290 C 248 290, 235 280, 238 275 C 241 270, 248 275, 248 280 Z" fill="#fb7185" filter="url(#soft-glow)"/>
+
+              <text x="250" y="450" font-family="'Sacramento', cursive" font-size="36" fill="#fbcfe8" text-anchor="middle">Besties for Life ✨</text>
             </svg>
 
           </div>
-          <p class="girly-heading text-2xl text-pink-900 font-normal">Our favorite memory.</p>
+          <p class="girly-heading text-2xl text-pink-900 font-normal">Always got your back!</p>
         </div>
       </div>
 
@@ -311,8 +342,8 @@
     let isSongPlaying = false;
     let songTimeout = null;
     let audioCtx = null;
+    let animationFrameId = null;
 
-    /* OPTIMIZED AUDIO SYNTHESIZER */
     function getAudioContext() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -326,20 +357,15 @@
     function playCuteBubblePop() {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-
       osc.type = 'sine';
       osc.frequency.setValueAtTime(500, ctx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(1300, ctx.currentTime + 0.08);
-
       gain.gain.setValueAtTime(0.2, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-
       osc.connect(gain);
       gain.connect(ctx.destination);
-
       osc.start();
       osc.stop(ctx.currentTime + 0.09);
     }
@@ -347,22 +373,17 @@
     function playCuteFairyChime() {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const notes = [1046.50, 1318.51, 1567.98];
       notes.forEach((freq, i) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.04);
-
         gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.04);
         gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + i * 0.04 + 0.02);
         gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.04 + 0.25);
-
         osc.connect(gain);
         gain.connect(ctx.destination);
-
         osc.start(ctx.currentTime + i * 0.04);
         osc.stop(ctx.currentTime + i * 0.04 + 0.28);
       });
@@ -371,45 +392,36 @@
     function playCuteFinaleMagic() {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const magicNotes = [523.25, 659.25, 783.99, 987.77, 1046.50, 1318.51, 1567.98];
       magicNotes.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
-
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.04);
-
         gain.gain.setValueAtTime(0, ctx.currentTime + idx * 0.04);
         gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + idx * 0.04 + 0.02);
         gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.04 + 1.0);
-
         osc.connect(gain);
         gain.connect(ctx.destination);
-
         osc.start(ctx.currentTime + idx * 0.04);
         osc.stop(ctx.currentTime + idx * 0.04 + 1.05);
       });
     }
 
-    /* SONG PLAYER WITH SAFE TIMERS (PREVENTS HANGS) */
     function playDiyaMelodyNote(freq, duration, delay) {
       const ctx = getAudioContext();
       if (!ctx || !isSongPlaying) return;
-
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
-
+      
       gain.gain.setValueAtTime(0, ctx.currentTime + delay);
-      gain.gain.linearRampToValueAtTime(0.25, ctx.currentTime + delay + 0.03);
+      gain.gain.linearRampToValueAtTime(0.125, ctx.currentTime + delay + 0.03);
       gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delay + duration);
-
+      
       osc.connect(gain);
       gain.connect(ctx.destination);
-
       osc.start(ctx.currentTime + delay);
       osc.stop(ctx.currentTime + delay + duration);
     }
@@ -459,7 +471,6 @@
       initPolaroid();
     }
 
-    /* OPTIMIZED THREE.JS SCENE */
     function initThreeJS() {
       const container = document.getElementById('three-container');
       if (!container || typeof THREE === 'undefined') return;
@@ -472,7 +483,8 @@
 
       renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false, powerPreference: "high-performance" });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      // Low-end devices ke liye pixelRatio restrict kiya hai taaki lag na ho
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
       container.appendChild(renderer.domElement);
 
       const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
@@ -482,7 +494,6 @@
       dirLight.position.set(10, 20, 15);
       scene.add(dirLight);
 
-      // Reusable Geometry
       const heartShape = new THREE.Shape();
       const x = 0, y = 0;
       heartShape.moveTo(x + 0.25, y + 0.25);
@@ -498,13 +509,14 @@
       geometry.center();
 
       const materials = [
-        new THREE.MeshPhongMaterial({ color: 0xf472b6 }),
-        new THREE.MeshPhongMaterial({ color: 0xc084fc }),
-        new THREE.MeshPhongMaterial({ color: 0xfb7185 })
+        new THREE.MeshBasicMaterial({ color: 0xf472b6 }),
+        new THREE.MeshBasicMaterial({ color: 0xc084fc }),
+        new THREE.MeshBasicMaterial({ color: 0xfb7185 })
       ];
 
       heartsGroup = new THREE.Group();
-      const heartCount = window.innerWidth < 768 ? 12 : 18; // Mobile optimization
+      // Mobile / Low devices ke liye 6 hearts rakhe hain taaki 60fps locked chale
+      const heartCount = window.innerWidth < 768 ? 6 : 12;
 
       for (let i = 0; i < heartCount; i++) {
         const mat = materials[i % materials.length];
@@ -517,9 +529,9 @@
         mesh.userData = {
           baseY: mesh.position.y,
           baseX: mesh.position.x,
-          speedY: 0.006 + Math.random() * 0.006,
-          rotSpeedX: (Math.random() - 0.5) * 0.01,
-          rotSpeedY: (Math.random() - 0.5) * 0.01,
+          speedY: 0.004 + Math.random() * 0.004,
+          rotSpeedX: (Math.random() - 0.5) * 0.006,
+          rotSpeedY: (Math.random() - 0.5) * 0.006,
           timeOffset: Math.random() * Math.PI * 2
         };
 
@@ -540,8 +552,8 @@
     }
 
     function animateThree() {
-      requestAnimationFrame(animateThree);
-      if (!isFinaleTriggered && clock && renderer && scene && camera) {
+      animationFrameId = requestAnimationFrame(animateThree);
+      if (clock && renderer && scene && camera) {
         const t = clock.getElapsedTime();
         hearts.forEach(h => {
           h.userData.baseY += h.userData.speedY;
@@ -551,12 +563,9 @@
           h.rotation.y += h.userData.rotSpeedY;
         });
         renderer.render(scene, camera);
-      } else if (renderer && scene && camera) {
-        renderer.render(scene, camera);
       }
     }
 
-    /* STEP NAVIGATION */
     function nextStep(targetStep) {
       if (targetStep <= currentStep || targetStep > totalSteps) return;
 
@@ -567,13 +576,13 @@
 
       if (typeof gsap !== 'undefined') {
         gsap.to(currentEl, {
-          duration: 0.25,
+          duration: 0.2,
           opacity: 0,
-          y: -15,
+          y: -10,
           onComplete: () => {
             currentEl.classList.add('hidden');
             nextEl.classList.remove('hidden');
-            gsap.fromTo(nextEl, { opacity: 0, y: 20 }, { duration: 0.35, opacity: 1, y: 0 });
+            gsap.fromTo(nextEl, { opacity: 0, y: 15 }, { duration: 0.3, opacity: 1, y: 0 });
           }
         });
       } else {
@@ -585,7 +594,6 @@
       document.getElementById('progress-bar').style.width = `${(currentStep / totalSteps) * 100}%`;
     }
 
-    /* POLAROID INTERACTION */
     function initPolaroid() {
       const polaroidWrapper = document.getElementById('polaroid-wrapper');
       const polaroid = document.getElementById('polaroid');
@@ -606,13 +614,12 @@
       }
     }
 
-    /* FINALE TRIGGER */
     function triggerFinale() {
       if (isFinaleTriggered) return;
       isFinaleTriggered = true;
 
       playCuteFinaleMagic();
-      setTimeout(() => toggleDiyaSong(), 600);
+      setTimeout(() => toggleDiyaSong(), 500);
 
       const btn = document.getElementById('celebrate-btn');
       const envelope = document.getElementById('envelope-wrapper');
@@ -624,17 +631,17 @@
         gsap.to(envelope, {
           scale: 0,
           opacity: 0,
-          duration: 0.3,
+          duration: 0.25,
           onComplete: () => {
             envelope.style.display = 'none';
             letterContent.classList.remove('hidden');
-            gsap.fromTo(letterContent, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.5 });
+            gsap.fromTo(letterContent, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4 });
           }
         });
       }
 
       if (typeof confetti !== 'undefined') {
-        confetti({ particleCount: 70, spread: 80, origin: { y: 0.6 } });
+        confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
       }
     }
 
